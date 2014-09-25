@@ -121,6 +121,3 @@ class TreeWidget(QtGui.QTreeWidget):
             menuactions[action].triggered.connect(functools.partial(self.execContextMenuAction,item,"add",action))
             menu.addAction(menuactions[action])
 
-
-
-

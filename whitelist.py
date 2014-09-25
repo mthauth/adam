@@ -152,21 +152,3 @@ class WhitelistItem():
         print self.quantity
         print "========================================"
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        

@@ -17,12 +17,6 @@ class AdamCore():
         print "saveAdaption()"
 
     def getTree(self):
-        #self.tree.addChild()
-        #self.tree = QtGui.QTreeWidgetItem(["root"])
-        #A = QtGui.QTreeWidgetItem(self.tree, ["A"])
-        #QtGui.QTreeWidgetItem(A, ["bar"])
-        #bazA = QtGui.QTreeWidgetItem(A, ["baz", "a", "b"])
-        #QtGui.QTreeWidgetItem(bazA, ["blub"])
         
         self.tree = QtGui.QTreeWidgetItem(["root"])
         
