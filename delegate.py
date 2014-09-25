@@ -85,44 +85,4 @@ class Delegate(QtGui.QStyledItemDelegate):
         if dataok == True:
             model.setData(index,QtCore.QVariant(text))
         
-        
-#        if self.coll == 0:
-#            is_option = False
-#            section_name = self.item.get_section()
-#            for condition in self.whitelist.conditions:
-#                cond = condition.get_section()
-#                if cond == section_name:
-#                    is_option = True
-#            if not is_option:
-#                regex = self.check_node_name(editor.text())
-#                self.item.setText(1, "")
-#            else:
-#                regex = None
-#        else:
-#            regex = self.check_text(editor.text())
-#            if regex != None:
-#                regex = True
-#        if regex:
-#            model.setData(index, QtCore.QVariant(editor.text()))
-#        self.item = None
- 
-#    def check_node_name(self, text):
-#        truth = False
-#        self.path += text
-#        for option in self.whitelist.options:
-#                opt = option.get_parameter()
-#                regex = re.match(opt, self.path, re.IGNORECASE)
-#                if regex != None:
-#                    truth = True
-#        return truth
-
-#    def check_text(self, text):
-#        item_name = self.item.text(0)
-#        for cond in self.whitelist.conditions:
-#            cond_name = cond.get_name()
-#            if item_name == cond_name:
-#                condition = cond.get_value()
-#                regex = re.match( condition, text, re.IGNORECASE )
-#                return regex
-#        return None
 
