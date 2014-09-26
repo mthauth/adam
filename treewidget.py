@@ -6,8 +6,7 @@ provides classes for visualize and interact a treewidget
 - expands / collaps items
 """
 
-from PyQt4 import QtGui
-from treeitem import TreeItem
+from PyQt4 import QtGui,QtCore
 from delegate import Delegate
 from contextmenu import ContextMenu
 import functools
@@ -19,28 +18,29 @@ class TreeWidget(QtGui.QTreeWidget):
     def __init__(self, core, parent=None):
         QtGui.QTreeWidget.__init__(self, parent)
         self.core = core
-        self.delegate = Delegate(self,core)
-        self.setItemDelegate(self.delegate)
-        
+
         self.setupUi()
-        self.ready=False
-        
-        
+
+
     def setupUi(self):
         """
         setup the ui of widget
         - three columns (two visible, one invisible)
         - connect double-click event with edit item function
         """
+
+        self.ready=False
         self.header().setHidden(True)
         self.setColumnCount(3)
         self.headerItem().setText(0, "name")
         self.headerItem().setText(1, "value")
         self.headerItem().setText(2, "type")
         self.setColumnHidden(2,True)
-        
-        self.itemDoubleClicked.connect(functools.partial(self.delegate.editItem))
         self.setExpandsOnDoubleClick(False)
+
+        self.delegate = Delegate(self)
+        self.setItemDelegate(self.delegate)
+        self.itemDoubleClicked.connect(functools.partial(self.delegate.editItem))
 
 
     def setupTree(self):
@@ -51,8 +51,8 @@ class TreeWidget(QtGui.QTreeWidget):
         """
         self.addItems(self,self.core.grammar.getMandatoryChilds('root'))
         self.ready=True
-            
-            
+
+
     def addItem(self, parent, type_):
         """
         add a single tree item type (child) (and its mandatory childs) to selected tree item (parent)
@@ -65,14 +65,14 @@ class TreeWidget(QtGui.QTreeWidget):
         grammaritem=self.core.grammar.getItem(type_)
         item=TreeItem(parent, grammaritem)
         self.expandItem(item)
-        
+
         mandatory=self.core.grammar.getMandatoryChilds(type_)
         if mandatory != None:
             self.addItems(item,mandatory)
-            
+
         self.resizeColumnToContents(0)
-              
-        
+
+
     def addItems(self,parent,types_):
         """
         add a number of tree items, like addItem (for tree setup and automatic)
@@ -81,7 +81,7 @@ class TreeWidget(QtGui.QTreeWidget):
         """
         for type_ in types_:
             self.addItem(parent,type_)
-        
+
 
     def contextMenuEvent(self, event):
         """
@@ -90,3 +90,19 @@ class TreeWidget(QtGui.QTreeWidget):
         - direct event to context menu
         """
         ContextMenu(self,self.core).handleEvent(event)
+
+
+class TreeItem(QtGui.QTreeWidgetItem):
+    """
+    represents a single treewidget item
+    """
+    def __init__(self, parent, grammardata):
+        self.grammar = grammardata
+        it0=str(self.grammar.name)
+        it1=str(self.grammar.value)
+        it2=str(self.grammar.type)
+
+        cols=[it0,it1,it2]
+
+        QtGui.QTreeWidgetItem.__init__(self, parent, cols)
+        self.setFlags(self.flags() | QtCore.Qt.ItemIsEditable)

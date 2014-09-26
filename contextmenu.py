@@ -11,9 +11,9 @@ import functools
 class ContextMenu(QtGui.QMenu):
     """
     provides context menu derived from QtGui.QMenu
-    - setup context menu 
+    - setup context menu
     - setup actions depending on context
-    - submenu "add" actions in context to depending tree item type 
+    - submenu "add" actions in context to depending tree item type
     """
     def __init__(self, parent, core):
         QtGui.QMenu.__init__(self, parent)
@@ -21,7 +21,7 @@ class ContextMenu(QtGui.QMenu):
         self.core=core
         self.pos=None
         self.addmenu=None
-        
+
 
     def handleEvent(self, event):
         """
@@ -30,7 +30,7 @@ class ContextMenu(QtGui.QMenu):
         - identify item of calling tree widget
         - setups menu
         - show menu
-        """        
+        """
         self.pos=None
         if self.parent.ready == False:
             return
@@ -62,14 +62,14 @@ class ContextMenu(QtGui.QMenu):
         if self.pos is not None:
             self.setupMenu(item)
             self.popup(self.pos)
-            
+
         event.accept()
 
-        
+
     def setupMenu(self,item):
         """
         setup the menu ready for display
-        - get mandatory and optional childs of item and 
+        - get mandatory and optional childs of item and
         - attach submenu add with them
         """
         try:
@@ -79,7 +79,7 @@ class ContextMenu(QtGui.QMenu):
 
         self.contextMenuActionsAdd(item,self.core.grammar.getMandatoryChilds(type_))
         self.contextMenuActionsAdd(item,self.core.grammar.getOptionalChilds(type_))
-                
+
 
     def contextMenuActionsAdd(self,item,actions):
         """
@@ -89,10 +89,10 @@ class ContextMenu(QtGui.QMenu):
         """
         if actions == None:
             return
-        
+
         if self.addmenu == None:
             self.addmenu=self.addMenu("add")
-            
+
         menuactions = {}
         for action in actions:
             text=self.core.grammar.items[action].name
