@@ -83,11 +83,6 @@
     <string>Open Grammar</string>
    </property>
   </action>
-  <action name="actionNeu">
-   <property name="text">
-    <string>Neu</string>
-   </property>
-  </action>
   <action name="actionNew">
    <property name="text">
     <string>New</string>
