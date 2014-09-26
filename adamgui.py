@@ -31,7 +31,7 @@ class AdamGui(QtGui.QMainWindow, AdamWindow):
         """
         """
         self.closeAdaptionDataFile()
-        self.openWhitelistFile()
+        self.openGrammarFile()
 
 
     def openAdaptionDataFile(self):
@@ -43,11 +43,11 @@ class AdamGui(QtGui.QMainWindow, AdamWindow):
         self.setTreeWidget()
 
 
-    def openWhitelistFile(self):
+    def openGrammarFile(self):
         """
         """
-        whitelistfilename = QtGui.QFileDialog.getOpenFileName(self, 'Open file')
-        self.core.openWhitelist(whitelistfilename)
+        grammarfilename = QtGui.QFileDialog.getOpenFileName(self, 'Open file')
+        self.core.openGrammar(grammarfilename)
         self.treeWidget.setupTree()
 
 
@@ -84,7 +84,7 @@ class AdamGui(QtGui.QMainWindow, AdamWindow):
         """
         self.actionExit.triggered.connect(lambda: self.close())
         self.actionNew.triggered.connect(lambda: self.newAdaptionDataFile())
-        self.actionOpenWhitelist.triggered.connect(lambda: self.openWhitelistFile())
+        self.actionOpenGrammar.triggered.connect(lambda: self.openGrammarFile())
         self.actionClose.triggered.connect(lambda: self.closeAdaptionDataFile())
         self.actionSave.triggered.connect(lambda: self.saveAdaptionDataFile())
         self.actionSaveAs.triggered.connect(lambda: self.saveAsAdaptionDataFile())

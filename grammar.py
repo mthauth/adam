@@ -6,13 +6,13 @@ import StringIO
 import ConfigParser
 
 
-class Whitelist():
+class Grammar():
     """
     """
     def __init__(self, filename):
-        self.openWhitelist(filename)
+        self.openGrammar(filename)
         
-    def openWhitelist(self, filename):
+    def openGrammar(self, filename):
         """
         """
         ##apply a dummy section
@@ -29,7 +29,7 @@ class Whitelist():
         ## and append them to a itemlist
         self.items = {}
         for section in self.sections:
-            self.items[section] = WhitelistItem(section, cp)
+            self.items[section] = GrammarItem(section, cp)
       
 
     def getMandatoryChilds(self,parent):
@@ -54,7 +54,7 @@ class Whitelist():
         
         
         
-class WhitelistItem():
+class GrammarItem():
     def __init__(self, type_, config):
         """
         """

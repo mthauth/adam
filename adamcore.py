@@ -1,7 +1,7 @@
 """
 """
 from PyQt4 import QtGui
-from whitelist import Whitelist
+from grammar import Grammar
  
 class AdamCore():
     """
@@ -9,7 +9,7 @@ class AdamCore():
     def __init__(self):
         """
         """
-        self.whitelist = None
+        self.grammar = None
 
    
     def openAdaption(self, filename):
@@ -26,8 +26,8 @@ class AdamCore():
         print "saveAdaption()"    
 
  
-    def openWhitelist(self, filename):
+    def openGrammar(self, filename):
         """
         """
-        self.whitelist = Whitelist(filename)
+        self.grammar = Grammar(filename)
 

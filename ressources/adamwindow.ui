@@ -42,7 +42,7 @@
     <property name="title">
      <string>Config</string>
     </property>
-    <addaction name="actionOpenWhitelist"/>
+    <addaction name="actionOpenGrammar"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuConfig"/>
@@ -78,9 +78,9 @@
     <string>Save As</string>
    </property>
   </action>
-  <action name="actionOpenWhitelist">
+  <action name="actionOpenGrammar">
    <property name="text">
-    <string>Open Whitelist</string>
+    <string>Open Grammar</string>
    </property>
   </action>
   <action name="actionNeu">

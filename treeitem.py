@@ -7,11 +7,11 @@ class TreeItem(QtGui.QTreeWidgetItem):
     """
     represents a single treewidget item 
     """
-    def __init__(self, parent, whitelistdata):
-        self.wl = whitelistdata
-        it0=str(self.wl.name)
-        it1=str(self.wl.value)
-        it2=str(self.wl.type)
+    def __init__(self, parent, grammardata):
+        self.grammar = grammardata
+        it0=str(self.grammar.name)
+        it1=str(self.grammar.value)
+        it2=str(self.grammar.type)
         
         cols=[it0,it1,it2]
         

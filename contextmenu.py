@@ -77,8 +77,8 @@ class ContextMenu(QtGui.QMenu):
         except:
             type_="root"
 
-        self.contextMenuActionsAdd(item,self.core.whitelist.getMandatoryChilds(type_))
-        self.contextMenuActionsAdd(item,self.core.whitelist.getOptionalChilds(type_))
+        self.contextMenuActionsAdd(item,self.core.grammar.getMandatoryChilds(type_))
+        self.contextMenuActionsAdd(item,self.core.grammar.getOptionalChilds(type_))
                 
 
     def contextMenuActionsAdd(self,item,actions):
@@ -95,7 +95,7 @@ class ContextMenu(QtGui.QMenu):
             
         menuactions = {}
         for action in actions:
-            text=self.core.whitelist.items[action].name
+            text=self.core.grammar.items[action].name
             menuactions[action] = QtGui.QAction(self)
             menuactions[action].setText(text)
             menuactions[action].triggered.connect(functools.partial(self.execContextMenuAction,item,"add",action))

@@ -49,7 +49,7 @@ class TreeWidget(QtGui.QTreeWidget):
         - add root childs to tree
         - set widget readiness flag to true
         """
-        self.addItems(self,self.core.whitelist.getMandatoryChilds('root'))
+        self.addItems(self,self.core.grammar.getMandatoryChilds('root'))
         self.ready=True
             
             
@@ -62,11 +62,11 @@ class TreeWidget(QtGui.QTreeWidget):
         - recursivly append mandatory childs
         - expand new items and resize column to fit them all
         """
-        wlitem=self.core.whitelist.getItem(type_)
-        item=TreeItem(parent, wlitem)
+        grammaritem=self.core.grammar.getItem(type_)
+        item=TreeItem(parent, grammaritem)
         self.expandItem(item)
         
-        mandatory=self.core.whitelist.getMandatoryChilds(type_)
+        mandatory=self.core.grammar.getMandatoryChilds(type_)
         if mandatory != None:
             self.addItems(item,mandatory)
             

@@ -23,12 +23,12 @@ class Delegate(QtGui.QStyledItemDelegate):
             self.data=None
             
         elif col == 0: #name column
-            self.data_check=item.wl.name_check
-            self.data=item.wl.name
+            self.data_check=item.grammar.name_check
+            self.data=item.grammar.name
             
         elif col == 1: #value column
-            self.data_check=item.wl.value_check
-            self.data=item.wl.value
+            self.data_check=item.grammar.value_check
+            self.data=item.grammar.value
             
         else: #other cases
             self.data_check=None
@@ -61,7 +61,7 @@ class Delegate(QtGui.QStyledItemDelegate):
             editor.setText(text)
             
         elif self.data_check[0] == "select":
-            for item in self.data.split(','):
+            for item in self.data_check[1].split(','):
                 editor.addItem(QtCore.QString(item))
             
 
