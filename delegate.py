@@ -1,15 +1,20 @@
+"""
+"""
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 import re
 
 class Delegate(QtGui.QStyledItemDelegate):
+    """
+    """
     def __init__(self, parent, core):
         QtGui.QStyledItemDelegate.__init__(self,parent)
         self.core = core
 
 
     def editItem(self, item, col):
-        print "editItem()"
+        """
+        """
         self.item=item
         self.col=col
         
@@ -28,17 +33,11 @@ class Delegate(QtGui.QStyledItemDelegate):
         else: #other cases
             self.data_check=None
             self.data=None
-
-        
-    def sizeHint(self, option, index):
-        print "sizeHint()"
-        default = QtGui.QStyledItemDelegate.sizeHint(self, option, index)
-        return QtCore.QSize(default.width(), default.height() + 6)
-
+            
 
     def createEditor(self, parent, option, index):
-        print "createEditor()"
-
+        """
+        """
         if self.data_check == None or self.data_check[0] == "readonly":
             return
         
@@ -52,8 +51,8 @@ class Delegate(QtGui.QStyledItemDelegate):
 
 
     def setEditorData(self, editor, index):
-        print "setEditorData()"
-        
+        """
+        """
         if self.data_check == None or self.data_check[0] == "readonly":
             return
         
@@ -67,8 +66,8 @@ class Delegate(QtGui.QStyledItemDelegate):
             
 
     def setModelData(self, editor, model, index):
-        print "setModelData()"
-        
+        """
+        """
         dataok=False
         if self.data_check == None or self.data_check[0] == "readonly":
             return
@@ -84,5 +83,10 @@ class Delegate(QtGui.QStyledItemDelegate):
 
         if dataok == True:
             model.setData(index,QtCore.QVariant(text))
-        
 
+
+    def sizeHint(self, option, index):
+        """
+        """
+        default = QtGui.QStyledItemDelegate.sizeHint(self, option, index)
+        return QtCore.QSize(default.width(), default.height() + 6)

@@ -1,9 +1,13 @@
+"""
+"""
 from PyQt4 import QtGui,QtCore
 
 
 class TreeItem(QtGui.QTreeWidgetItem):
+    """
+    represents a single treewidget item 
+    """
     def __init__(self, parent, whitelistdata):
-
         self.wl = whitelistdata
         it0=str(self.wl.name)
         it1=str(self.wl.value)
@@ -13,4 +17,3 @@ class TreeItem(QtGui.QTreeWidgetItem):
         
         QtGui.QTreeWidgetItem.__init__(self, parent, cols)
         self.setFlags(self.flags() | QtCore.Qt.ItemIsEditable)
-        

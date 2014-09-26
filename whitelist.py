@@ -1,16 +1,20 @@
+"""
+provides classes to handle hold the formal grammar
+"""
 import os
 import StringIO
 import ConfigParser
 
 
 class Whitelist():
+    """
+    """
     def __init__(self, filename):
-        print "Whitelist()"
         self.openWhitelist(filename)
         
     def openWhitelist(self, filename):
-        print "openWhitelist()"
-        
+        """
+        """
         ##apply a dummy section
         config = StringIO.StringIO()
         #config.write( '[dummysection]\n' )
@@ -27,19 +31,24 @@ class Whitelist():
         for section in self.sections:
             self.items[section] = WhitelistItem(section, cp)
       
+
     def getMandatoryChilds(self,parent):
-        print "getMandatoryChilds()"
-        print ":"+parent+":"
+        """
+        """
         parent = unicode(parent)
         return self.items[parent].childs_mandatory
+
         
     def getOptionalChilds(self,parent):
-        print "getOptionalChilds()"
+        """
+        """
         parent = unicode(parent)
         return self.items[parent].childs_optional
         
+
     def getItem(self,type_):
-        print "getItem()"
+        """
+        """
         type_ = unicode(type_)
         return self.items[type_]
         
@@ -47,8 +56,8 @@ class Whitelist():
         
 class WhitelistItem():
     def __init__(self, type_, config):
-        print "WhitelistItem()"
-        
+        """
+        """
         # type of item
         self.type = type_
         
@@ -129,10 +138,10 @@ class WhitelistItem():
         except:
             self.quantity="multiple"
 
-        self.print_()
+        self.dump()
 
 
-    def print_(self):
+    def dump(self):
         print "========================================"
         print "new Item:"
         print self.type
