@@ -1,7 +1,7 @@
 """
 provides display and editing facility for ADaM tree item
 """
-from PyQt4 import QtGui,QtCore
+from PyQt4 import QtGui, QtCore
 import re
 
 class Delegate(QtGui.QStyledItemDelegate):
@@ -9,8 +9,10 @@ class Delegate(QtGui.QStyledItemDelegate):
     delegation class for editing facility on TreeItem based on QtGui.QStyledItemDelegate
     """
     def __init__(self, parent):
-        QtGui.QStyledItemDelegate.__init__(self,parent)
+        QtGui.QStyledItemDelegate.__init__(self, parent)
         self.core = parent.core
+        self.data_check = None
+        self.data = None
 
 
     def editItem(self, item, col):
@@ -20,20 +22,20 @@ class Delegate(QtGui.QStyledItemDelegate):
         """
 
         if col == 2: #type column
-            self.data_check=None
-            self.data=None
+            self.data_check = None
+            self.data = None
 
         elif col == 0: #name column
-            self.data_check=item.grammar.name_check
-            self.data=item.grammar.name
+            self.data_check = item.grammar.name_check
+            self.data = item.grammar.name
 
         elif col == 1: #value column
-            self.data_check=item.grammar.value_check
-            self.data=item.grammar.value
+            self.data_check = item.grammar.value_check
+            self.data = item.grammar.value
 
         else: #other cases
-            self.data_check=None
-            self.data=None
+            self.data_check = None
+            self.data = None
 
 
     def createEditor(self, parent, option, index):
@@ -81,21 +83,21 @@ class Delegate(QtGui.QStyledItemDelegate):
         - regex: verify content vs given regular expression
         - select: take content and set it
         """
-        dataok=False
+        dataok = False
         if self.data_check == None or self.data_check[0] == "readonly":
             return
 
         elif self.data_check[0] == "regex":
-            text=editor.text()
-            if re.match(self.data_check[1],text,re.IGNORECASE) != None:
-                dataok=True
+            text = editor.text()
+            if re.match(self.data_check[1], text, re.IGNORECASE) != None:
+                dataok = True
 
         elif self.data_check[0] == "select":
-            text=editor.currentText()
-            dataok=True
+            text = editor.currentText()
+            dataok = True
 
         if dataok == True:
-            model.setData(index,QtCore.QVariant(text))
+            model.setData(index, QtCore.QVariant(text))
 
 
     def sizeHint(self, option, index):

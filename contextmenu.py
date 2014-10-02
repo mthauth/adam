@@ -17,10 +17,10 @@ class ContextMenu(QtGui.QMenu):
     """
     def __init__(self, parent, core):
         QtGui.QMenu.__init__(self, parent)
-        self.parent=parent
-        self.core=core
-        self.pos=None
-        self.addmenu=None
+        self.parent = parent
+        self.core = core
+        self.pos = None
+        self.addmenu = None
 
 
     def handleEvent(self, event):
@@ -31,7 +31,7 @@ class ContextMenu(QtGui.QMenu):
         - setups menu
         - show menu
         """
-        self.pos=None
+        self.pos = None
         if self.parent.ready == False:
             return
         elif event.reason() == event.Mouse:
@@ -66,22 +66,22 @@ class ContextMenu(QtGui.QMenu):
         event.accept()
 
 
-    def setupMenu(self,item):
+    def setupMenu(self, item):
         """
         setup the menu ready for display
         - get mandatory and optional childs of item and
         - attach submenu add with them
         """
         try:
-            type_=item.text(2)
+            type_ = item.text(2)
         except:
-            type_="root"
+            type_ = "root"
 
-        self.contextMenuActionsAdd(item,self.core.grammar.getMandatoryChilds(type_))
-        self.contextMenuActionsAdd(item,self.core.grammar.getOptionalChilds(type_))
+        self.contextMenuActionsAdd(item, self.core.grammar.getMandatoryChilds(type_))
+        self.contextMenuActionsAdd(item, self.core.grammar.getOptionalChilds(type_))
 
 
-    def contextMenuActionsAdd(self,item,actions):
+    def contextMenuActionsAdd(self, item, actions):
         """
         attach contexted sub menu add actions of item
         - attach the submenu add
@@ -91,20 +91,20 @@ class ContextMenu(QtGui.QMenu):
             return
 
         if self.addmenu == None:
-            self.addmenu=self.addMenu("add")
+            self.addmenu = self.addMenu("add")
 
         menuactions = {}
         for action in actions:
-            text=self.core.grammar.items[action].name
+            text = self.core.grammar.items[action].name
             menuactions[action] = QtGui.QAction(self)
             menuactions[action].setText(text)
-            menuactions[action].triggered.connect(functools.partial(self.execContextMenuAction,item,"add",action))
+            menuactions[action].triggered.connect(functools.partial(self.execContextMenuAction, item, "add", action))
             self.addmenu.addAction(menuactions[action])
 
 
-    def execContextMenuAction(self,parent,action,type_):
+    def execContextMenuAction(self, parent, action, type_):
         """
         slot for triggered context menu action
         """
         if action == 'add':
-            self.parent.addItem(parent,type_)
+            self.parent.addItem(parent, type_)

@@ -1,13 +1,13 @@
 #!/usr/bin/python
+"""
+main ADaM application
+"""
 
-import sys 
+import sys
 from PyQt4 import QtGui
 from adamgui import AdamGui
 
 if __name__ == "__main__":
-    """
-    main function for ADaM
-    """  
-    app = QtGui.QApplication(sys.argv) 
+    APP = QtGui.QApplication(sys.argv)
     AdamGui().show()
-    sys.exit(app.exec_())
+    sys.exit(APP.exec_())

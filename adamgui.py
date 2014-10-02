@@ -18,6 +18,8 @@ class AdamGui(QtGui.QMainWindow, AdamWindow):
         self.core = AdamCore()
         QtGui.QMainWindow.__init__(self)
         AdamWindow.__init__(self)
+        self.treeWidget = None
+        self.filename = None
         self.setupAdamGui()
 
 
@@ -29,7 +31,7 @@ class AdamGui(QtGui.QMainWindow, AdamWindow):
         """
         self.setupUi(self)
         self.treeWidget = TreeWidget(self.core, self.centralwidget)
-        self.gridLayout.addWidget(self.treeWidget,0,0,1,1)
+        self.gridLayout.addWidget(self.treeWidget, 0, 0, 1, 1)
         self.setupSignalsSlots()
 
 
@@ -51,7 +53,10 @@ class AdamGui(QtGui.QMainWindow, AdamWindow):
         - ask for grammar file for new adaption data
         - setup tree widget
         """
-        grammarfilename = QtGui.QFileDialog.getOpenFileName(self, 'Open file')
+        grammarfilename = QtGui.QFileDialog.getOpenFileName(self,
+								'Open file',
+								'./grammar/'
+								)
         self.core.openGrammar(grammarfilename)
         self.treeWidget.setupTree()
 
@@ -68,10 +73,9 @@ class AdamGui(QtGui.QMainWindow, AdamWindow):
         slot for saving adaption data file
         - if filename is not defined, saveAs will be called
         """
-        try:
-            self.filename
-            self.core.saveAdaption(self.filename)
-        except:
+        if self.filename is not None:
+            self.core.saveAdaption(self.filename, self.treeWidget)
+        else:
             self.saveAsAdaptionDataFile()
 
 
@@ -81,7 +85,7 @@ class AdamGui(QtGui.QMainWindow, AdamWindow):
         - ask for file to save into
         """
         self.filename = QtGui.QFileDialog.getOpenFileName(self, 'Save file as')
-        self.core.saveAdaption(self.filename)
+        self.core.saveAdaption(self.filename, self.treeWidget)
 
 
     def exportAdaptionDataAs(self):
